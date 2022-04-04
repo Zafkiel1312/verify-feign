@@ -1,12 +1,6 @@
-package de.otto.salesproduct.build.verifyfeign
+package com.github.zafkiel1312.verifyfeign
 
 import com.beust.klaxon.Klaxon
-import com.github.zafkiel1312.verifyfeign.ControllerAnnotationProcessor
-import com.github.zafkiel1312.verifyfeign.HttpMethod
-import com.github.zafkiel1312.verifyfeign.Parameter
-import com.github.zafkiel1312.verifyfeign.ParameterType
-import com.github.zafkiel1312.verifyfeign.RestControllerView
-import com.github.zafkiel1312.verifyfeign.VerifyFeign
 import feign.Param
 import feign.RequestLine
 import java.io.File

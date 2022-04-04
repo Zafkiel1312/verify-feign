@@ -1,6 +1,5 @@
-package de.otto.salesproduct.build.verifyfeign
+package com.github.zafkiel1312.verifyfeign
 
-import com.github.zafkiel1312.verifyfeign.ControllerAnnotationProcessor
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension

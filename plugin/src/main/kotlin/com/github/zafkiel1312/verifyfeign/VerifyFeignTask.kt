@@ -1,11 +1,9 @@
-package de.otto.salesproduct.build.verifyfeign
+package com.github.zafkiel1312.verifyfeign
 
 import com.beust.klaxon.Klaxon
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import com.github.zafkiel1312.verifyfeign.Parameter
-import com.github.zafkiel1312.verifyfeign.RestControllerView
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 import java.io.File
