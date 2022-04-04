@@ -1,5 +1,8 @@
 plugins {
     `java-gradle-plugin`
+    id("maven-publish")
+    id("com.gradle.plugin-publish") version "0.18.0"
+
     id("org.jetbrains.kotlin.jvm") version "1.5.31"
 }
 
@@ -31,16 +34,37 @@ dependencies {
     implementation("com.beust:klaxon:5.5")
 }
 
+group = "com.github.zafkiel1312"
+version = "1.0"
+
 gradlePlugin {
     plugins {
         create("verify-feign") {
             id = "com.github.zafkiel1312.verify-feign"
+            displayName = "verify-feign"
+            description = "Plugin to provide pullRequestId task that helps jenkins determine where to put violations find in multibranch builds"
+            //ToDo Replace description
             implementationClass = "com.github.zafkiel1312.verifyfeign.VerifyFeignPlugin"
         }
     }
 }
 
-// Add a source set for the functional test suite
+pluginBundle {
+    website = "https://www.gradle.org/"
+    vcsUrl = "https://github.com/Zafkiel1312/verify-feign"
+    tags = listOf("feign", "spring", "spring-boot")
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "localPluginRepository"
+            url = uri("../local-plugin-repository")
+        }
+    }
+}
+
+/*// Add a source set for the functional test suite
 val functionalTestSourceSet = sourceSets.create("functionalTest") {
 }
 
@@ -57,4 +81,4 @@ gradlePlugin.testSourceSets(functionalTestSourceSet)
 tasks.named<Task>("check") {
     // Run the functional tests as part of `check`
     dependsOn(functionalTest)
-}
+}*/

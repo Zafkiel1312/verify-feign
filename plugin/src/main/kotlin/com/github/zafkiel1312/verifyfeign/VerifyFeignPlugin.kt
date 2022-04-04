@@ -51,7 +51,7 @@ class VerifyFeignPlugin : Plugin<Project> {
         project.pluginManager.apply("org.jetbrains.kotlin.jvm")
         project.pluginManager.apply("org.jetbrains.kotlin.kapt")
         project.configurations.getByName("kapt").dependencies.add(
-            project.dependencies.create("de.otto.salesproduct.buildplugins:buildPlugins")
+            project.dependencies.create("com.github.zafkiel1312.buildplugins:buildPlugins")
         )
 
         project.pluginManager.withPlugin("org.jetbrains.kotlin.kapt") {
