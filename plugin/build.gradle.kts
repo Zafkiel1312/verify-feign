@@ -32,10 +32,11 @@ dependencies {
 }
 
 gradlePlugin {
-    // Define the plugin
-    val greeting by plugins.creating {
-        id = "verifyfeign.greeting"
-        implementationClass = "verifyfeign.VerifyFeignPlugin2"
+    plugins {
+        create("verify-feign") {
+            id = "com.github.zafkiel1312.verify-feign"
+            implementationClass = "com.github.zafkiel1312.verifyfeign.VerifyFeignPlugin"
+        }
     }
 }
 
