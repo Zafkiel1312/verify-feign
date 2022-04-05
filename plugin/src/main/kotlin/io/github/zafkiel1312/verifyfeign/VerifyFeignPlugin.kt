@@ -1,4 +1,4 @@
-package com.github.zafkiel1312.verifyfeign
+package io.github.zafkiel1312.verifyfeign
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -37,9 +37,9 @@ class VerifyFeignPlugin : Plugin<Project> {
                 it.description =
                     "Checks if RestControllers are used by clients and clients have suitable rest-interfaces"
                 it.group = "check"
-                project.rootProject.tasks.named("build") { build ->
+                /*project.rootProject.tasks.named("build") { build ->
                     build.dependsOn(it)
-                }
+                }*/
             }
         }
     }
@@ -50,9 +50,9 @@ class VerifyFeignPlugin : Plugin<Project> {
 
         project.pluginManager.apply("org.jetbrains.kotlin.jvm")
         project.pluginManager.apply("org.jetbrains.kotlin.kapt")
-        project.configurations.getByName("kapt").dependencies.add(
-            project.dependencies.create("com.github.zafkiel1312.buildplugins:buildPlugins")
-        )
+        /*project.configurations.getByName("kapt").dependencies.add(
+            project.dependencies.create("io.github.zafkiel1312.buildplugins:buildPlugins")
+        )*/
 
         project.pluginManager.withPlugin("org.jetbrains.kotlin.kapt") {
             project.afterEvaluate {

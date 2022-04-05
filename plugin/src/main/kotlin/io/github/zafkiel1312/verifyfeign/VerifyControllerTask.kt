@@ -1,4 +1,4 @@
-package com.github.zafkiel1312.verifyfeign
+package io.github.zafkiel1312.verifyfeign
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper

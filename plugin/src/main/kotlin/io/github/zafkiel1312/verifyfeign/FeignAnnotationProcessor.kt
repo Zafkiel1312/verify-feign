@@ -1,4 +1,4 @@
-package com.github.zafkiel1312.verifyfeign
+package io.github.zafkiel1312.verifyfeign
 
 import com.beust.klaxon.Klaxon
 import feign.Param

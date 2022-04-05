@@ -1,9 +1,10 @@
 plugins {
-    `java-gradle-plugin`
+    id("java-gradle-plugin")
     id("maven-publish")
     id("com.gradle.plugin-publish") version "0.18.0"
 
     id("org.jetbrains.kotlin.jvm") version "1.5.31"
+    id("io.github.zafkiel1312.verifyfeign") version "1.0"
 }
 
 repositories {
@@ -34,23 +35,25 @@ dependencies {
     implementation("com.beust:klaxon:5.5")
 }
 
-group = "com.github.zafkiel1312"
+//apply(plugin = "io.github.zafkiel1312.verifyfeign")
+
+group = "io.github.zafkiel1312"
 version = "1.0"
 
 gradlePlugin {
     plugins {
-        create("verify-feign") {
-            id = "com.github.zafkiel1312.verify-feign"
-            displayName = "verify-feign"
+        create("verifyfeign") {
+            id = "io.github.zafkiel1312.verifyfeign"
+            displayName = "verifyfeign"
             description = "Plugin to provide pullRequestId task that helps jenkins determine where to put violations find in multibranch builds"
             //ToDo Replace description
-            implementationClass = "com.github.zafkiel1312.verifyfeign.VerifyFeignPlugin"
+            implementationClass = "io.github.zafkiel1312.verifyfeign.VerifyFeignPlugin"
         }
     }
 }
 
 pluginBundle {
-    website = "https://www.gradle.org/"
+    website = "https://github.com/Zafkiel1312/verify-feign"
     vcsUrl = "https://github.com/Zafkiel1312/verify-feign"
     tags = listOf("feign", "spring", "spring-boot")
 }
