@@ -4,7 +4,18 @@ plugins {
     id("com.gradle.plugin-publish") version "0.18.0"
 
     id("org.jetbrains.kotlin.jvm") version "1.5.31"
-    id("io.github.zafkiel1312.verifyfeign") version "1.0"
+}
+
+group = "io.github.zafkiel1312.verifyfeign"
+version = "0.1"
+
+gradlePlugin {
+    plugins {
+        create("verifyfeign") {
+            id = "io.github.zafkiel1312.verifyfeign"
+            implementationClass = "io.github.zafkiel1312.verifyfeign.VerifyFeignPlugin"
+        }
+    }
 }
 
 repositories {
@@ -14,48 +25,40 @@ repositories {
 dependencies {
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-
-    // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-    // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
-
-    // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
-    implementation("io.github.openfeign:feign-core:10.9")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21")
 
     implementation("org.springframework:spring-context:5.3.2")
     implementation("org.springframework:spring-web:5.3.2")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21")
 
+    implementation("io.github.openfeign:feign-core:10.9")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.5")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.10.5")
     implementation("com.beust:klaxon:5.5")
 }
 
-//apply(plugin = "io.github.zafkiel1312.verifyfeign")
-
-group = "io.github.zafkiel1312"
-version = "1.0"
-
-gradlePlugin {
-    plugins {
-        create("verifyfeign") {
-            id = "io.github.zafkiel1312.verifyfeign"
-            displayName = "verifyfeign"
-            description = "Plugin to provide pullRequestId task that helps jenkins determine where to put violations find in multibranch builds"
-            //ToDo Replace description
-            implementationClass = "io.github.zafkiel1312.verifyfeign.VerifyFeignPlugin"
-        }
-    }
-}
-
 pluginBundle {
     website = "https://github.com/Zafkiel1312/verify-feign"
     vcsUrl = "https://github.com/Zafkiel1312/verify-feign"
-    tags = listOf("feign", "spring", "spring-boot")
+    description =
+        "Plugin to check, if RestControllers are used by clients and clients have suitable rest-interfaces"
+
+    (plugins) {
+        "verifyfeign" {
+            displayName = "Verify-Feign"
+            tags = listOf("feign", "spring", "spring-boot")
+            version = project.version.toString()
+        }
+    }
+
+    mavenCoordinates {
+        groupId = project.group.toString()
+        artifactId = project.name
+        version = project.version.toString()
+    }
 }
 
 publishing {

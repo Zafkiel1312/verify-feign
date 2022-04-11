@@ -1,8 +1,6 @@
 package io.github.zafkiel1312.verifyfeign
 
 import com.beust.klaxon.Klaxon
-import io.github.zafkiel1312.verifyfeign.FrontendEndpoint
-import io.github.zafkiel1312.verifyfeign.PublicEndpoint
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

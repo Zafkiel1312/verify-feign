@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import java.io.File
 
 /**
- * Plugin to provide pullRequestId task that helps jenkins determine where to put violations find in multibranch builds
+ *  Plugin to check, if RestControllers are used by clients and clients have suitable rest-interfaces
  */
 class VerifyFeignPlugin : Plugin<Project> {
 
@@ -21,7 +21,7 @@ class VerifyFeignPlugin : Plugin<Project> {
                 it.dependsOn(task)
             }
             it.description =
-                "Checks if their are suitable spring restcontrollers for feignclient interfaces annotated with @VerifyFeign"
+                "Checks if there are suitable spring restcontrollers for feignclient interfaces annotated with @VerifyFeign"
             it.group = "check"
         }
         project.afterEvaluate {
@@ -37,9 +37,6 @@ class VerifyFeignPlugin : Plugin<Project> {
                 it.description =
                     "Checks if RestControllers are used by clients and clients have suitable rest-interfaces"
                 it.group = "check"
-                /*project.rootProject.tasks.named("build") { build ->
-                    build.dependsOn(it)
-                }*/
             }
         }
     }
@@ -50,9 +47,9 @@ class VerifyFeignPlugin : Plugin<Project> {
 
         project.pluginManager.apply("org.jetbrains.kotlin.jvm")
         project.pluginManager.apply("org.jetbrains.kotlin.kapt")
-        /*project.configurations.getByName("kapt").dependencies.add(
-            project.dependencies.create("io.github.zafkiel1312.buildplugins:buildPlugins")
-        )*/
+        project.configurations.getByName("kapt").dependencies.add(
+            project.dependencies.create("io.github.zafkiel1312.verifyfeign:plugin")
+        )
 
         project.pluginManager.withPlugin("org.jetbrains.kotlin.kapt") {
             project.afterEvaluate {

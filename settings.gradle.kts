@@ -7,4 +7,5 @@ pluginManagement {
 }
 
 rootProject.name = "verify-feign"
-include("plugin", "test")
+includeBuild("plugin")
+includeBuild("exampleProject")

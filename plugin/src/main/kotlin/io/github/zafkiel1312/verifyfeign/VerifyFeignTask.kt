@@ -117,7 +117,7 @@ open class VerifyFeignTask : DefaultTask() {
 
     private fun safeController(projectPath: String, controller: Map<String, RestControllerView.RestMethodView>) =
         project.rootProject.findProject(projectPath)?.let {
-            val json=Klaxon().toJsonString(controller)
+            val json = Klaxon().toJsonString(controller)
             File(it.buildDir.absolutePath + "/verifyfeign/controller_result/controllers.json").writeText(json)
         }
 }
