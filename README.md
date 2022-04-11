@@ -51,9 +51,9 @@ All tasks can be found in the group `check`
 
 A demonstration for this plugin can be found inside exampleProject. This project 
 contains a client and a server. It shows different combinations of client- and 
-server-interfaces. If you call any of the 3 Gradle tasks, they should build without
+server-interfaces. If you call any of the 3 Gradle tasks, they should run without
 any problem. 
 
 You can try commenting out some client- or server-interfaces or delete 
 a ``@PublicEndpoint`` or ``@FrontendEndpoint`` annotation and rerun the tasks. 
-See how they behave. 
+See how the behavior changes. 
