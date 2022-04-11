@@ -1,11 +1,11 @@
-package io.github.zafkiel1312.test
+package io.github.zafkiel1312.exampleProject
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class TestApplication
+class ExampleProjectServer
 
 fun main(args: Array<String>) {
-	runApplication<TestApplication>(*args)
+	runApplication<ExampleProjectServer>(*args)
 }
