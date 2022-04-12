@@ -18,7 +18,7 @@ You are provided with 3 annotations
  ``@PublicEndpoint``
  ``@FrontendEndpoint``
 
-With these ou can mark, how to analyse the controllers and clients.
+With these you can mark, how to analyse the controllers and clients.
 
 The first one marks a Feign-client and needs to be in front of an interface, which
 implements client-requests. The annotation has a parameter, which describes the 
@@ -27,10 +27,15 @@ target-module, where the matching rest-controller is implemented.
 If an interface is marked with ``@VerifyFeign``, all ``@RequestLine``s will be 
 checked for a matching rest-controllers. 
 
-The rest-interfaces need to be implemented inside a ``@RestController``. Every 
-interface will be tested, whether it has at least one client, which calls the 
-interface. Only interfaces marked as ``@PublicEndpoint`` or as ``@FrontendEndpoint``
-will be ignored.
+The rest-controllers need to be implemented in a class annotated with ``@RestController``. 
+Every interface inside this class will be tested, whether it has at least one client, 
+which calls the interface. Only interfaces marked as ``@PublicEndpoint`` or 
+as ``@FrontendEndpoint`` will be ignored.
+
+`@PublicEndpoint` has one parameter, which describes, what this Endpoint is used for
+
+`@FrontendEndpoint` has two parameters. The first points to the Frontend-Module, where 
+this Endpoint is used and the second is a description about what it does.
 
 ## Gradle Tasks
 
