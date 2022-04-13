@@ -4,7 +4,7 @@ plugins {
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.spring") version "1.6.10"
 
-    id("io.github.zafkiel1312.verifyfeign") version "0.1"
+    id("io.github.zafkiel1312.verifyfeign") version "0.2"
 }
 
 repositories {
@@ -24,7 +24,7 @@ dependencies {
     implementation("io.github.openfeign:feign-core:10.9")
     implementation("io.github.openfeign:feign-jackson:10.9")
 
-    implementation("io.github.zafkiel1312.verifyfeign:plugin:0.1")
+    implementation("io.github.zafkiel1312.verifyfeign:verifyfeign:0.2")
 }
 
 group = "io.github.zafkiel1312.exampleProject"

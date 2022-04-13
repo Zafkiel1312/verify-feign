@@ -3,7 +3,7 @@ package io.github.zafkiel1312.exampleProject.client
 import feign.Headers
 import feign.Param
 import feign.RequestLine
-import io.github.zafkiel1312.verifyfeign.VerifyFeign
+import io.github.zafkiel1312.verifyfeign.annotations.VerifyFeign
 
 @VerifyFeign(":server")
 interface HelloWorldClient {

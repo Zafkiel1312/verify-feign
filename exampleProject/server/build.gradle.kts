@@ -6,7 +6,7 @@ plugins {
 	kotlin("jvm") version "1.6.10"
 	kotlin("plugin.spring") version "1.6.10"
 
-	id("io.github.zafkiel1312.verifyfeign") version "0.1"
+	id("io.github.zafkiel1312.verifyfeign") version "0.2"
 }
 
 group = "io.github.zafkiel1312.exampleProject"
@@ -28,7 +28,7 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
 
 	implementation(project(":client"))
-	implementation("io.github.zafkiel1312.verifyfeign:plugin:0.1")
+	implementation("io.github.zafkiel1312.verifyfeign:verifyfeign")
 }
 
 tasks.withType<KotlinCompile> {

@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.github.zafkiel1312.verifyfeign"
-version = "0.1"
+version = "0.2"
 
 gradlePlugin {
     plugins {

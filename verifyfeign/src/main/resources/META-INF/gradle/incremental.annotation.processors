@@ -1,0 +1,2 @@
+io.github.zafkiel1312.verifyfeign.annotationProcessor.ControllerAnnotationProcessor,aggregating
+io.github.zafkiel1312.verifyfeign.annotationProcessor.FeignAnnotationProcessor,aggregating

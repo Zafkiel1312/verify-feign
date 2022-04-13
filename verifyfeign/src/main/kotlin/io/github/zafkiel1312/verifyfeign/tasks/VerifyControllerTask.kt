@@ -1,8 +1,9 @@
-package io.github.zafkiel1312.verifyfeign
+package io.github.zafkiel1312.verifyfeign.tasks
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import io.github.zafkiel1312.verifyfeign.annotationProcessor.RestControllerView
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 import java.io.File

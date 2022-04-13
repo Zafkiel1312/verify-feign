@@ -1,8 +1,9 @@
-package io.github.zafkiel1312.verifyfeign
+package io.github.zafkiel1312.verifyfeign.annotationProcessor
 
 import com.beust.klaxon.Klaxon
 import feign.Param
 import feign.RequestLine
+import io.github.zafkiel1312.verifyfeign.annotations.VerifyFeign
 import java.io.File
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.RoundEnvironment

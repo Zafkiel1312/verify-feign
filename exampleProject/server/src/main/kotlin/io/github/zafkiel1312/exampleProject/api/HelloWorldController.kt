@@ -1,8 +1,9 @@
 package io.github.zafkiel1312.exampleProject.api
 
+import io.github.zafkiel1312.exampleProject.client.HelloWorldClient
 import io.github.zafkiel1312.exampleProject.client.StringView
-import io.github.zafkiel1312.verifyfeign.FrontendEndpoint
-import io.github.zafkiel1312.verifyfeign.PublicEndpoint
+import io.github.zafkiel1312.verifyfeign.annotations.FrontendEndpoint
+import io.github.zafkiel1312.verifyfeign.annotations.PublicEndpoint
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/test")
-class HelloWorldController() {
-    @GetMapping("/")
+class HelloWorldController(
+    val helloWorldClient: HelloWorldClient
+) {
+    @GetMapping
     fun helloWorld(): StringView {
         return StringView("Hello world!")
     }
@@ -46,6 +49,9 @@ class HelloWorldController() {
         return
     }
 
-
-
+    @PublicEndpoint("Test-Endpoint")
+    @GetMapping("/client")
+    fun helloWorldOverClient(): String {
+        return "${helloWorldClient.helloWorld().string} Sent over client!"
+    }
 }

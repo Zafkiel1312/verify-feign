@@ -1,4 +1,4 @@
 rootProject.name = "exampleProject"
 
-includeBuild("../plugin")
+includeBuild("../verifyfeign")
 include("client", "server")

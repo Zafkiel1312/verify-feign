@@ -1,4 +1,4 @@
-package io.github.zafkiel1312.verifyfeign
+package io.github.zafkiel1312.verifyfeign.annotations
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS)

@@ -1,6 +1,8 @@
-package io.github.zafkiel1312.verifyfeign
+package io.github.zafkiel1312.verifyfeign.annotationProcessor
 
 import com.beust.klaxon.Klaxon
+import io.github.zafkiel1312.verifyfeign.annotations.FrontendEndpoint
+import io.github.zafkiel1312.verifyfeign.annotations.PublicEndpoint
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -43,7 +45,7 @@ data class RestControllerView(
 }
 
 enum class ParameterType {
-    PATH, QUERY, BODY
+    PATH, QUERY, BODY //ToDo add optional
 }
 
 enum class HttpMethod {
@@ -89,24 +91,32 @@ class ControllerAnnotationProcessor : AbstractProcessor() {
     override fun process(annotations: MutableSet<out TypeElement>, roundEnv: RoundEnvironment): Boolean {
         parseControllers(roundEnv)
         parseMapping(roundEnv, GetMapping::class.java, HttpMethod.GET) {
-            it.getAnnotation(
-                GetMapping::class.java
-            ).value.joinToString("")
+            getPathOrSlash(
+                it.getAnnotation(
+                    GetMapping::class.java
+                ).value.joinToString("")
+            )
         }
         parseMapping(roundEnv, PostMapping::class.java, HttpMethod.POST) {
-            it.getAnnotation(
-                PostMapping::class.java
-            ).value.joinToString("")
+            getPathOrSlash(
+                it.getAnnotation(
+                    PostMapping::class.java
+                ).value.joinToString("")
+            )
         }
         parseMapping(roundEnv, DeleteMapping::class.java, HttpMethod.DELETE) {
-            it.getAnnotation(
-                DeleteMapping::class.java
-            ).value.joinToString("")
+            getPathOrSlash(
+                it.getAnnotation(
+                    DeleteMapping::class.java
+                ).value.joinToString("")
+            )
         }
         parseMapping(roundEnv, PutMapping::class.java, HttpMethod.PUT) {
-            it.getAnnotation(
-                PutMapping::class.java
-            ).value.joinToString("")
+            getPathOrSlash(
+                it.getAnnotation(
+                    PutMapping::class.java
+                ).value.joinToString("")
+            )
         }
         parseParameters(roundEnv, PathVariable::class.java, ParameterType.PATH)
         parseParameters(roundEnv, RequestParam::class.java, ParameterType.QUERY)
@@ -175,6 +185,12 @@ class ControllerAnnotationProcessor : AbstractProcessor() {
                 )
             }
         }
+    }
+
+    private fun getPathOrSlash(path: String): String {
+        if (path == "")
+            return "/"
+        return path
     }
 
     private fun parseParameters(

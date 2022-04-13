@@ -1,5 +1,9 @@
 package io.github.zafkiel1312.verifyfeign
 
+import io.github.zafkiel1312.verifyfeign.annotationProcessor.ControllerAnnotationProcessor
+import io.github.zafkiel1312.verifyfeign.annotationProcessor.FeignAnnotationProcessor
+import io.github.zafkiel1312.verifyfeign.tasks.VerifyControllerTask
+import io.github.zafkiel1312.verifyfeign.tasks.VerifyFeignTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
@@ -48,7 +52,7 @@ class VerifyFeignPlugin : Plugin<Project> {
         project.pluginManager.apply("org.jetbrains.kotlin.jvm")
         project.pluginManager.apply("org.jetbrains.kotlin.kapt")
         project.configurations.getByName("kapt").dependencies.add(
-            project.dependencies.create("io.github.zafkiel1312.verifyfeign:plugin")
+            project.dependencies.create("io.github.zafkiel1312.verifyfeign:verifyfeign")
         )
 
         project.pluginManager.withPlugin("org.jetbrains.kotlin.kapt") {
