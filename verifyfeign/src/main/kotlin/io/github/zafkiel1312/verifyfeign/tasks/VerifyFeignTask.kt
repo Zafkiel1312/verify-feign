@@ -38,15 +38,15 @@ open class VerifyFeignTask : DefaultTask() {
         val clients = objectMapper.readValue(clientFile, typeRef)
         val allController = mutableMapOf<String, Map<String, RestControllerView.RestMethodView>>()
 
-        clients.forEach {
-            val controller = allController[it.value.targetModule] ?: loadController(it.value.targetModule) ?: error(
-                "Project: ${it.value.targetModule} has no RestController for Client: ${it.key}"
+        clients.forEach { (key, value) ->
+            val controller = allController[value.targetModule] ?: loadController(value.targetModule) ?: error(
+                "Project: ${value.targetModule} has no RestController for Client: $key"
             )
-            it.value.methods.forEach { (_, method) ->
+            value.methods.forEach { (_, method) ->
                 findMethod(method, controller.values.toSet())
             }
-            allController[it.value.targetModule] = controller
-            safeController(it.value.targetModule, controller)
+            allController[value.targetModule] = controller
+            safeController(value.targetModule, controller)
         }
     }
 

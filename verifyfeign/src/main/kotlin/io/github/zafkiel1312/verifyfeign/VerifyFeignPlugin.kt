@@ -19,41 +19,31 @@ class VerifyFeignPlugin : Plugin<Project> {
         project.subprojects {
             addKapt(it)
         }
-        project.tasks.register("verifyFeign", VerifyFeignTask::class.java) {
-            it.dependsOn("compileKotlin")
-            project.rootProject.getTasksByName("compileKotlin", true).forEach { task ->
-                it.dependsOn(task)
-            }
-            it.description =
-                "Checks if there are suitable spring restcontrollers for feignclient interfaces annotated with @VerifyFeign"
-            it.group = "check"
-        }
+
+        registerVerifyFeignTask(project)
         project.afterEvaluate {
-            project.tasks.register("verifyController", VerifyControllerTask::class.java) {
-                val verifyFeignTask = project.rootProject.getTasksByName("verifyFeign", true)
-                it.dependsOn(verifyFeignTask)
-                it.description =
-                    "Checks if RestControllers are used by clients"
-                it.group = "check"
-            }
-            project.tasks.register("verifyApi") {
-                it.dependsOn("verifyFeign", "verifyController")
-                it.description =
-                    "Checks if RestControllers are used by clients and clients have suitable rest-interfaces"
-                it.group = "check"
-            }
+            registerVerifyControllerTask(project)
+            registerVerifyApiTask(project)
         }
     }
 
     private fun addKapt(project: Project) {
-        File(project.buildDir.absolutePath + "/verifyfeign/controller").mkdirs()
-        File(project.buildDir.absolutePath + "/verifyfeign/client").mkdirs()
+        addPluginsAndDependencies(project)
+        configureInputsAndOutputs(project)
+        configureKaptExtension(project)
+    }
 
+    private fun addPluginsAndDependencies(project: Project) {
         project.pluginManager.apply("org.jetbrains.kotlin.jvm")
         project.pluginManager.apply("org.jetbrains.kotlin.kapt")
         project.configurations.getByName("kapt").dependencies.add(
-            project.dependencies.create("io.github.zafkiel1312.verifyfeign:verifyfeign")
+            project.dependencies.create("io.github.zafkiel1312.verifyfeign:verifyfeign:0.2")
         )
+    }
+
+    private fun configureInputsAndOutputs(project: Project) {
+        File(project.buildDir.absolutePath + "/verifyfeign/controller").mkdirs()
+        File(project.buildDir.absolutePath + "/verifyfeign/client").mkdirs()
 
         project.pluginManager.withPlugin("org.jetbrains.kotlin.kapt") {
             project.afterEvaluate {
@@ -64,13 +54,46 @@ class VerifyFeignPlugin : Plugin<Project> {
                 }
             }
         }
+    }
 
+    private fun configureKaptExtension(project: Project) {
         project.extensions.configure<KaptExtension>("kapt") {
             it.useBuildCache = true
             it.arguments {
                 arg(ControllerAnnotationProcessor.OUTPUT_DIR, project.buildDir.absolutePath + "/verifyfeign/controller")
                 arg(FeignAnnotationProcessor.OUTPUT_DIR, project.buildDir.absolutePath + "/verifyfeign/client")
             }
+        }
+    }
+
+    private fun registerVerifyFeignTask(project: Project) {
+        project.tasks.register("verifyFeign", VerifyFeignTask::class.java) {
+            it.dependsOn("compileKotlin")
+            project.rootProject.getTasksByName("compileKotlin", true).forEach { task ->
+                it.dependsOn(task)
+            }
+            it.description =
+                "Checks if there are suitable spring restcontrollers for feignclient interfaces annotated with @VerifyFeign"
+            it.group = "check"
+        }
+    }
+
+    private fun registerVerifyControllerTask(project: Project) {
+        project.tasks.register("verifyController", VerifyControllerTask::class.java) {
+            val verifyFeignTask = project.rootProject.getTasksByName("verifyFeign", true)
+            it.dependsOn(verifyFeignTask)
+            it.description =
+                "Checks if RestControllers are used by clients"
+            it.group = "check"
+        }
+    }
+
+    private fun registerVerifyApiTask(project: Project) {
+        project.tasks.register("verifyApi") {
+            it.dependsOn("verifyFeign", "verifyController")
+            it.description =
+                "Checks if RestControllers are used by clients and clients have suitable rest-interfaces"
+            it.group = "check"
         }
     }
 }

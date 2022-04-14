@@ -48,9 +48,6 @@ enum class ParameterType {
     PATH, QUERY, BODY //ToDo add optional
 }
 
-enum class HttpMethod {
-    PUT, GET, POST, DELETE
-}
 
 @SupportedSourceVersion(SourceVersion.RELEASE_11)
 @SupportedAnnotationTypes
@@ -90,33 +87,12 @@ class ControllerAnnotationProcessor : AbstractProcessor() {
 
     override fun process(annotations: MutableSet<out TypeElement>, roundEnv: RoundEnvironment): Boolean {
         parseControllers(roundEnv)
-        parseMapping(roundEnv, GetMapping::class.java, HttpMethod.GET) {
-            getPathOrSlash(
-                it.getAnnotation(
-                    GetMapping::class.java
-                ).value.joinToString("")
-            )
-        }
-        parseMapping(roundEnv, PostMapping::class.java, HttpMethod.POST) {
-            getPathOrSlash(
-                it.getAnnotation(
-                    PostMapping::class.java
-                ).value.joinToString("")
-            )
-        }
-        parseMapping(roundEnv, DeleteMapping::class.java, HttpMethod.DELETE) {
-            getPathOrSlash(
-                it.getAnnotation(
-                    DeleteMapping::class.java
-                ).value.joinToString("")
-            )
-        }
-        parseMapping(roundEnv, PutMapping::class.java, HttpMethod.PUT) {
-            getPathOrSlash(
-                it.getAnnotation(
-                    PutMapping::class.java
-                ).value.joinToString("")
-            )
+        enumValues<HttpMethod>().forEach {
+            parseMapping(roundEnv, it.annotationClass, it) { element ->
+                getPathOrSlash(
+                    element, it.annotationClass
+                )
+            }
         }
         parseParameters(roundEnv, PathVariable::class.java, ParameterType.PATH)
         parseParameters(roundEnv, RequestParam::class.java, ParameterType.QUERY)
@@ -187,10 +163,18 @@ class ControllerAnnotationProcessor : AbstractProcessor() {
         }
     }
 
-    private fun getPathOrSlash(path: String): String {
-        if (path == "")
-            return "/"
-        return path
+    private fun getPathOrSlash(element: Element, annotationType: Class<out Annotation>): String {
+        when (annotationType) {
+            GetMapping::class.java -> element.getAnnotation(annotationType).value.joinToString("")
+            PostMapping::class.java -> element.getAnnotation(annotationType).value.joinToString("")
+            PutMapping::class.java -> element.getAnnotation(annotationType).value.joinToString("")
+            DeleteMapping::class.java -> element.getAnnotation(annotationType).value.joinToString("")
+            else -> error("Unknown type of annotation. This should not happen!")
+        }.let {
+            if (it == "")
+                return "/"
+            return it
+        }
     }
 
     private fun parseParameters(

@@ -1,10 +1,10 @@
-pluginManagement {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-        maven(url = "./local-plugin-repository")
-    }
-}
+// pluginManagement {
+//     repositories {
+//         mavenCentral()
+//         gradlePluginPortal()
+//         maven(url = "./local-plugin-repository")
+//     }
+// }
 
 rootProject.name = "verify-feign"
 includeBuild("verifyfeign")
