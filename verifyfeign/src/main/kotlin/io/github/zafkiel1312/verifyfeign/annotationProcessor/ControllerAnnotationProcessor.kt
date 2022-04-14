@@ -25,8 +25,8 @@ import javax.lang.model.element.ExecutableElement
 import javax.lang.model.element.TypeElement
 import javax.tools.Diagnostic
 
-data class Parameter(val name: String, val type: String, val parameterType: ParameterType)
-data class RestControllerView(
+internal data class Parameter(val name: String, val type: String, val parameterType: ParameterType)
+internal data class RestControllerView(
     val basePath: String,
     val name: String,
     val members: MutableMap<String, RestMethodView> = mutableMapOf()
@@ -44,7 +44,7 @@ data class RestControllerView(
     )
 }
 
-enum class ParameterType {
+internal enum class ParameterType {
     PATH, QUERY, BODY //ToDo add optional
 }
 
@@ -52,7 +52,7 @@ enum class ParameterType {
 @SupportedSourceVersion(SourceVersion.RELEASE_11)
 @SupportedAnnotationTypes
 @SupportedOptions(ControllerAnnotationProcessor.OUTPUT_DIR)
-class ControllerAnnotationProcessor : AbstractProcessor() {
+internal class ControllerAnnotationProcessor : AbstractProcessor() {
 
     companion object {
         const val OUTPUT_DIR = "controllerannotationprocessor.outputdir"

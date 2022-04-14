@@ -26,7 +26,7 @@ internal data class FeignClient(
 @SupportedSourceVersion(SourceVersion.RELEASE_11)
 @SupportedAnnotationTypes
 @SupportedOptions(ControllerAnnotationProcessor.OUTPUT_DIR)
-class FeignAnnotationProcessor : AbstractProcessor() {
+internal class FeignAnnotationProcessor : AbstractProcessor() {
 
     companion object {
         const val OUTPUT_DIR = "feignannotationprocessor.outputdir"

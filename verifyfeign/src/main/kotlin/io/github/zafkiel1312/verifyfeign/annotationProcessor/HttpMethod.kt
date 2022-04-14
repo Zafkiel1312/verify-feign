@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 
-enum class HttpMethod(val annotationClass: Class<out Annotation>) {
+internal enum class HttpMethod(val annotationClass: Class<out Annotation>) {
     PUT(PutMapping::class.java),
     GET(GetMapping::class.java),
     POST(PostMapping::class.java),

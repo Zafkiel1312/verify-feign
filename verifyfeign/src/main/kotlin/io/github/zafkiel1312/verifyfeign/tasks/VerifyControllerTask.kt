@@ -8,7 +8,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 
-open class VerifyControllerTask : DefaultTask() {
+internal open class VerifyControllerTask : DefaultTask() {
     init {
         inputs.dir(project.buildDir.absolutePath + "/verifyfeign/controller_result")
         inputs.dir(project.buildDir.absolutePath + "/verifyfeign/controller")
