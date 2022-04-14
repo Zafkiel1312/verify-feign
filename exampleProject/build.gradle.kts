@@ -19,3 +19,7 @@ tasks.create("verifyApi") {
         "Calls verifyApi in the server- and client-submodule"
     this.group = "check"
 }
+
+springBoot {
+    mainClass.set("server.io.github.zafkiel1312.exampleProject.ExampleProjectServer")
+}
