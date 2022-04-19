@@ -15,6 +15,7 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
+	gradlePluginPortal()
 }
 
 dependencies {
@@ -28,7 +29,7 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
 
 	implementation(project(":client"))
-	implementation("io.github.zafkiel1312.verifyfeign:verifyfeign")
+	implementation("io.github.zafkiel1312.verifyfeign:verifyfeign:0.2")
 }
 
 tasks.withType<KotlinCompile> {
