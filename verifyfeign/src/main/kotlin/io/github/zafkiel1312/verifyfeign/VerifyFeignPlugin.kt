@@ -12,7 +12,7 @@ import java.io.File
 /**
  *  Plugin to check, if RestControllers are used by clients and clients have suitable rest-interfaces
  */
-internal class VerifyFeignPlugin : Plugin<Project> {
+class VerifyFeignPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         addKapt(project)

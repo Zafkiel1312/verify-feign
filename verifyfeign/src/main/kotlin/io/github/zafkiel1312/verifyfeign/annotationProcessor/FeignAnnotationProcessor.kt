@@ -26,7 +26,7 @@ internal data class FeignClient(
 @SupportedSourceVersion(SourceVersion.RELEASE_11)
 @SupportedAnnotationTypes
 @SupportedOptions(ControllerAnnotationProcessor.OUTPUT_DIR)
-internal class FeignAnnotationProcessor : AbstractProcessor() {
+class FeignAnnotationProcessor : AbstractProcessor() {
 
     companion object {
         const val OUTPUT_DIR = "feignannotationprocessor.outputdir"
@@ -73,6 +73,7 @@ internal class FeignAnnotationProcessor : AbstractProcessor() {
 
     private fun processClients(roundEnv: RoundEnvironment) {
         val elements = roundEnv.getElementsAnnotatedWithAny(setOf(VerifyFeign::class.java)) ?: emptyList()
+        // ToDo Line 75 throws NullpointerException, when no @VerifyFeign Annotations are used... But Why?
         elements.filter {
             it.kind == ElementKind.INTERFACE
         }.forEach {

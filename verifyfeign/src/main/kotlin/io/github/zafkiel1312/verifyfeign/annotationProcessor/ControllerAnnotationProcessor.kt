@@ -52,7 +52,7 @@ internal enum class ParameterType {
 @SupportedSourceVersion(SourceVersion.RELEASE_11)
 @SupportedAnnotationTypes
 @SupportedOptions(ControllerAnnotationProcessor.OUTPUT_DIR)
-internal class ControllerAnnotationProcessor : AbstractProcessor() {
+class ControllerAnnotationProcessor : AbstractProcessor() {
 
     companion object {
         const val OUTPUT_DIR = "controllerannotationprocessor.outputdir"

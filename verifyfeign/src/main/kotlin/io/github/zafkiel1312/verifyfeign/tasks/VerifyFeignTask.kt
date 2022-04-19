@@ -11,7 +11,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 
-internal open class VerifyFeignTask : DefaultTask() {
+open class VerifyFeignTask : DefaultTask() {
     init {
         project.rootProject.allprojects.forEach {
             File(it.buildDir.absolutePath + "/verifyfeign/controller").mkdirs()
