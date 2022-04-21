@@ -1,6 +1,5 @@
 package io.github.zafkiel1312.exampleProject.client
 
-import feign.Headers
 import feign.Param
 import feign.RequestLine
 import io.github.zafkiel1312.verifyfeign.annotations.VerifyFeign
@@ -8,7 +7,6 @@ import io.github.zafkiel1312.verifyfeign.annotations.VerifyFeign
 @VerifyFeign(":server")
 interface HelloWorldClient {
 
-    @Headers("Content-Type: application/json; charset=utf-8")
     @RequestLine("GET /")
     fun helloWorld(): StringView
 

@@ -19,7 +19,7 @@ class HelloWorldController(
 ) {
     @GetMapping
     fun helloWorld(): StringView {
-        return StringView("Hello world!")
+        return StringView("Hello World!")
     }
 
     @PublicEndpoint("Returns Hello World!")
@@ -28,7 +28,7 @@ class HelloWorldController(
         return "Hello World!"
     }
 
-    @FrontendEndpoint(":placeholder", "Returns Hello World!")
+    @FrontendEndpoint(":frontendModule", "Returns Hello World!")
     @GetMapping("/frontend")
     fun helloWorldFrontend(): String {
         return  "Hello World!"
