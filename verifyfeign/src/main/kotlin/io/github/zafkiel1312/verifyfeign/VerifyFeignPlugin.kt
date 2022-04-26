@@ -20,6 +20,8 @@ class VerifyFeignPlugin : Plugin<Project> {
             addKapt(it)
         }
 
+        addDependencyToClasspath(project)
+
         registerVerifyFeignTask(project)
         project.afterEvaluate {
             registerVerifyControllerTask(project)
@@ -37,7 +39,7 @@ class VerifyFeignPlugin : Plugin<Project> {
         project.pluginManager.apply("org.jetbrains.kotlin.jvm")
         project.pluginManager.apply("org.jetbrains.kotlin.kapt")
         project.configurations.getByName("kapt").dependencies.add(
-            project.dependencies.create("io.github.zafkiel1312.verifyfeign:verifyfeign:0.2")
+            project.dependencies.create("io.github.zafkiel1312.verifyfeign:verifyfeign:0.3")
         )
     }
 
@@ -95,5 +97,13 @@ class VerifyFeignPlugin : Plugin<Project> {
                 "Checks if RestControllers are used by clients and clients have suitable rest-interfaces"
             it.group = "check"
         }
+    }
+
+    private fun addDependencyToClasspath(project: Project) {
+        project.repositories.gradlePluginPortal()
+        project.dependencies.add(
+            "implementation",
+            "io.github.zafkiel1312.verifyfeign:verifyfeign:0.3"
+        )
     }
 }

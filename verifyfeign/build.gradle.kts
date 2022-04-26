@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.github.zafkiel1312.verifyfeign"
-version = "0.2"
+version = "0.3"
 
 gradlePlugin {
     plugins {
@@ -20,6 +20,7 @@ gradlePlugin {
 
 repositories {
     mavenCentral()
+    gradlePluginPortal()
 }
 
 dependencies {
@@ -50,14 +51,14 @@ pluginBundle {
         "verifyfeign" {
             displayName = "Verify-Feign"
             tags = listOf("feign", "spring", "spring-boot")
-            version = project.version.toString()
+            version = "0.3"
         }
     }
 
     mavenCoordinates {
         groupId = project.group.toString()
         artifactId = project.name
-        version = project.version.toString()
+        version = "0.3"
     }
 }
 
