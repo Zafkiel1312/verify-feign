@@ -12,9 +12,15 @@ Add the plugin to your gradle build file.
 
 `id("io.github.zafkiel1312.verifyfeign")`
 
-Add the dependency to your gradle build file.
+Mark your feign clients corresponding to your rest controllers with
 
-`implementation("io.github.zafkiel1312.verifyfeign:verifyfeign")`
+`@VerifyFeign(":targetModule")`
+
+Execute the gradle task
+
+`verifyApi`
+
+to check if your clients and controllers match or if there are any contradictions. 
 
 The latest Version of the plugin can be found on the [gradle plugin portal](https://plugins.gradle.org/plugin/io.github.zafkiel1312.verifyfeign)
 
