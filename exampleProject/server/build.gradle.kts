@@ -28,7 +28,6 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
 
 	implementation(project(":client"))
-	//implementation("io.github.zafkiel1312.verifyfeign:verifyfeign:0.3")
 }
 
 tasks.withType<KotlinCompile> {
