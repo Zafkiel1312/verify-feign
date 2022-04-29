@@ -14,6 +14,8 @@ import java.io.File
  */
 class VerifyFeignPlugin : Plugin<Project> {
 
+    val VERIFY_FEIGN_VERSION = "0.3"
+
     override fun apply(project: Project) {
         addKapt(project)
         project.subprojects {
@@ -39,7 +41,7 @@ class VerifyFeignPlugin : Plugin<Project> {
         project.pluginManager.apply("org.jetbrains.kotlin.jvm")
         project.pluginManager.apply("org.jetbrains.kotlin.kapt")
         project.configurations.getByName("kapt").dependencies.add(
-            project.dependencies.create("io.github.zafkiel1312.verifyfeign:verifyfeign:0.3")
+            project.dependencies.create("io.github.zafkiel1312.verifyfeign:verifyfeign:${VERIFY_FEIGN_VERSION}")
         )
     }
 
@@ -103,7 +105,7 @@ class VerifyFeignPlugin : Plugin<Project> {
         project.repositories.gradlePluginPortal()
         project.dependencies.add(
             "implementation",
-            "io.github.zafkiel1312.verifyfeign:verifyfeign:0.3"
+            "io.github.zafkiel1312.verifyfeign:verifyfeign:${VERIFY_FEIGN_VERSION}"
         )
     }
 }

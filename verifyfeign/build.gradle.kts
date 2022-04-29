@@ -6,8 +6,10 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.5.31"
 }
 
+val VERIFY_FEIGN_VERSION = "0.3"
+
 group = "io.github.zafkiel1312.verifyfeign"
-version = "0.3"
+version = VERIFY_FEIGN_VERSION
 
 gradlePlugin {
     plugins {
@@ -51,14 +53,14 @@ pluginBundle {
         "verifyfeign" {
             displayName = "Verify-Feign"
             tags = listOf("feign", "spring", "spring-boot")
-            version = "0.3"
+            version = VERIFY_FEIGN_VERSION
         }
     }
 
     mavenCoordinates {
         groupId = project.group.toString()
         artifactId = project.name
-        version = "0.3"
+        version = project.version.toString()
     }
 }
 
