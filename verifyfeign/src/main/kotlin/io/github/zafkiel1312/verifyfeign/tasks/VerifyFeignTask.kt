@@ -54,34 +54,46 @@ open class VerifyFeignTask : DefaultTask() {
         feignMethod: RestControllerView.RestMethodView,
         allMethods: Set<RestControllerView.RestMethodView>
     ) {
-        val matchingMethod = allMethods.firstOrNull {
+        val possiblyMatchingMethods = allMethods.filter {
             it.path.endsWith(feignMethod.path) && it.type == feignMethod.type
         }
-        when {
-            matchingMethod == null ->
-                error(
-                    "No Suitable controller method could be found for ${feignMethod.name}: ${feignMethod.type} ${feignMethod.path}"
-                )
-            matchingMethod.methodName != feignMethod.methodName ->
-                error(
-                    "Controller method: ${matchingMethod.name} and feignMethod: ${feignMethod.name} match but don't have the same name: Controller: ${matchingMethod.methodName} vs Feign: ${feignMethod.methodName}"
-                )
-            matchingMethod.returnType != feignMethod.returnType ->
-                error(
-                    "Controller method: ${matchingMethod.name} and feignMethod: ${feignMethod.name} match but don't have the same returnType: Controller: ${matchingMethod.returnType} vs Feign: ${feignMethod.returnType}"
-                )
-            matchingMethod.parameters != feignMethod.parameters ->
-                error(
-                    "Controller method: ${matchingMethod.name} and feignMethod: ${feignMethod.name} match but don't have the same parameters:\n${
-                    parameterDiff(
-                        matchingMethod.parameters, feignMethod.parameters
-                    )
-                    }"
-                )
-            else -> {
-                matchingMethod.feignClients.add(feignMethod.name)
+        if (possiblyMatchingMethods.isEmpty()) {
+            error(
+                "No Suitable controller method could be found for ${feignMethod.name}: ${feignMethod.type} ${feignMethod.path}"
+            )
+        } else {
+            checkForMatchingMethods(feignMethod, possiblyMatchingMethods)
+        }
+    }
+
+    private fun checkForMatchingMethods(
+        feignMethod: RestControllerView.RestMethodView,
+        possiblyMatchingMethods: List<RestControllerView.RestMethodView>
+    ) {
+        val errorMessage: MutableList<String> = mutableListOf()
+        possiblyMatchingMethods.forEach {
+            when {
+                it.methodName != feignMethod.methodName ->
+                    errorMessage.add("Controller method: ${it.name} and feignMethod: ${feignMethod.name} match but don't have the same name: Controller: ${it.methodName} vs Feign: ${feignMethod.methodName}")
+
+                it.returnType != feignMethod.returnType ->
+                    errorMessage.add("Controller method: ${it.name} and feignMethod: ${feignMethod.name} match but don't have the same returnType: Controller: ${it.returnType} vs Feign: ${feignMethod.returnType}")
+
+                it.parameters != feignMethod.parameters ->
+                    errorMessage.add(
+                        "Controller method: ${it.name} and feignMethod: ${feignMethod.name} match but don't have the same parameters:\n${
+                            parameterDiff(
+                                it.parameters, feignMethod.parameters
+                            )
+                        }")
+
+                else -> {
+                    it.feignClients.add(feignMethod.name)
+                    return
+                }
             }
         }
+        error(errorMessage.joinToString("\n"))
     }
 
     private fun parameterDiff(controllerParam: Set<Parameter>, feignParam: Set<Parameter>): String {
