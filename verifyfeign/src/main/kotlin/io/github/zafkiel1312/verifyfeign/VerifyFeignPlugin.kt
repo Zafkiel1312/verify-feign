@@ -14,7 +14,7 @@ import java.io.File
  */
 class VerifyFeignPlugin : Plugin<Project> {
 
-    val VERIFY_FEIGN_VERSION = "0.3"
+    val VERIFY_FEIGN_VERSION = "0.4"
 
     override fun apply(project: Project) {
         addKapt(project)
