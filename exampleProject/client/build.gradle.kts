@@ -4,7 +4,7 @@ plugins {
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.spring") version "1.6.10"
 
-    id("io.github.zafkiel1312.verifyfeign") version "0.3"
+    id("io.github.zafkiel1312.verifyfeign") version "0.4"
 }
 
 repositories {

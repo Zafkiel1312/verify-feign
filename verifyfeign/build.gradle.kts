@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.5.31"
 }
 
-val VERIFY_FEIGN_VERSION = "0.3"
+val VERIFY_FEIGN_VERSION = "0.4"
 
 group = "io.github.zafkiel1312.verifyfeign"
 version = VERIFY_FEIGN_VERSION
