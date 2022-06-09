@@ -13,6 +13,9 @@ interface HelloWorldClient {
     @RequestLine("GET /{num}")
     fun helloWorldFromUrl(@Param("num") num: Int): String
 
+    @RequestLine("GET /{num}")
+    fun helloWorldFromUrl2(@Param("num") num: Int): String
+
     @RequestLine("POST /")
     fun helloWorldNumber(num: Int): String
 

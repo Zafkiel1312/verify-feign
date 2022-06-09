@@ -39,6 +39,11 @@ class HelloWorldController(
         return "Hello world number ${num}!"
     }
 
+    @GetMapping("/{num}")
+    fun helloWorldFromUrl2(@PathVariable num: Int): String {
+        return "Hello world number ${num}!"
+    }
+
     @PostMapping("/")
     fun helloWorldNumber(@RequestBody num: Int): String {
         return "Hello world number ${num}!"
