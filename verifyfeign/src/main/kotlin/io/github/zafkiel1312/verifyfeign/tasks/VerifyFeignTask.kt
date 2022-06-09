@@ -78,6 +78,7 @@ open class VerifyFeignTask : DefaultTask() {
 
                 it.returnType != feignMethod.returnType ->
                     errorMessage.add("Controller method: ${it.name} and feignMethod: ${feignMethod.name} match but don't have the same returnType: Controller: ${it.returnType} vs Feign: ${feignMethod.returnType}")
+
                 it.parameters != feignMethod.parameters ->
                     errorMessage.add(
                         "Controller method: ${it.name} and feignMethod: ${feignMethod.name} match but don't have the same parameters:\n${
@@ -85,6 +86,7 @@ open class VerifyFeignTask : DefaultTask() {
                                 it.parameters, feignMethod.parameters
                             )
                         }")
+
                 else -> {
                     it.feignClients.add(feignMethod.name)
                     return
