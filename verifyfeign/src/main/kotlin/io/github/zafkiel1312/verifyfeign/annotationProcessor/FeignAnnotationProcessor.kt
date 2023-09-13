@@ -23,7 +23,7 @@ internal data class FeignClient(
     val methods: MutableMap<String, RestControllerView.RestMethodView> = mutableMapOf()
 )
 
-@SupportedSourceVersion(SourceVersion.RELEASE_11)
+@SupportedSourceVersion(SourceVersion.RELEASE_17)
 @SupportedAnnotationTypes
 @SupportedOptions(ControllerAnnotationProcessor.OUTPUT_DIR)
 class FeignAnnotationProcessor : AbstractProcessor() {

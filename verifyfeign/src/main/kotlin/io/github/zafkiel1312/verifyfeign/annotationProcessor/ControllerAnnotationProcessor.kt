@@ -49,7 +49,7 @@ internal enum class ParameterType {
 }
 
 
-@SupportedSourceVersion(SourceVersion.RELEASE_11)
+@SupportedSourceVersion(SourceVersion.RELEASE_17)
 @SupportedAnnotationTypes
 @SupportedOptions(ControllerAnnotationProcessor.OUTPUT_DIR)
 class ControllerAnnotationProcessor : AbstractProcessor() {
