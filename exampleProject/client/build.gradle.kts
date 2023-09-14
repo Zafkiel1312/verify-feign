@@ -1,10 +1,12 @@
-plugins {
-    id("org.springframework.boot") version "2.6.6"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.6.10"
-    kotlin("plugin.spring") version "1.6.10"
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-    id("io.github.zafkiel1312.verifyfeign") version "0.4"
+plugins {
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+    kotlin("jvm")
+    kotlin("plugin.spring")
+
+    id("io.github.zafkiel1312.verifyfeign") version "0.5"
 }
 
 repositories {
@@ -27,4 +29,10 @@ dependencies {
 
 group = "io.github.zafkiel1312.exampleProject"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xjsr305=strict")
+        jvmTarget = "17"
+    }
+}
