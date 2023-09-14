@@ -28,9 +28,6 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-//java.sourceCompatibility = JavaVersion.VERSION_11
-//java.targetCompatibility = JavaVersion.VERSION_17
-
 springBoot {
     mainClass.set("server.io.github.zafkiel1312.exampleProject.ExampleProjectServer")
 }

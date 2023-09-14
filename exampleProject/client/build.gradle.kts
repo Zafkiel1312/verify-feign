@@ -25,8 +25,6 @@ dependencies {
 
     implementation("io.github.openfeign:feign-core:10.9")
     implementation("io.github.openfeign:feign-jackson:10.9")
-
-    kapt("io.github.zafkiel1312.verifyfeign:verifyfeign:0.4")
 }
 
 group = "io.github.zafkiel1312.exampleProject"
